@@ -57,9 +57,8 @@ class Customer(User):
         self.cart.clear()
 
 class Admin(User):
-    def __init__(self, name, phone, email, address, age):
+    def __init__(self, name, phone, email, address):
         super().__init__(name, phone, email, address)
-        self.age = age
         
     def add_Employees(self, restaurant, employee):
         restaurant.add_Employees(employee)
@@ -73,7 +72,8 @@ class Admin(User):
     def remove_item(self, restaurant, item):
         restaurant.menu.remove_item(item)
         
-
+    def view_menu(self, restaurant):
+        restaurant.menu.show_menu_items()
 
 
 
