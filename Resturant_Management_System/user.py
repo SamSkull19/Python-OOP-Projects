@@ -32,11 +32,18 @@ class Admin(User):
 
     def view_Employees(self, restaurant):
         restaurant.view_Employees()
+
+    def add_new_items(self, restaurant, item):
+        restaurant.menu.add_menu_items(item)
+    
+    def remove_item(self, restaurant, item):
+        restaurant.menu.remove_item(item)
         
 class Restaurant:
     def __init__(self, name):
         self.name = name
         self.employees = [] # This is our employee database
+        self.menu = Menu()
 
     def add_Employees(self, employee):
         self.employees.append(employee)
