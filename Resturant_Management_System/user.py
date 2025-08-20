@@ -52,7 +52,9 @@ class Customer(User):
         
         print(f'Total Price : {self.cart.total_price}')
 
-
+    def pay_bill(self):
+        print(f'Total {self.cart.total_price} paid successfully')
+        self.cart.clear()
 
 class Admin(User):
     def __init__(self, name, phone, email, address, age):

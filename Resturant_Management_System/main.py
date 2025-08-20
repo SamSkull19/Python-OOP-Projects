@@ -21,3 +21,24 @@ def customer_menu():
         print(f'4. Pay Bill')
         print(f'5. Exit')
 
+        choice = int(input('Enter your Choice : '))
+
+        if choice == 1:
+            customer.view_menu_items(neffroxx)
+
+        elif choice == 2:
+            item_name = input('Enter item name : ')
+            quantity = int(input('Enter item quantity : '))
+            customer.add_to_cart(neffroxx, item_name, quantity)
+        
+        elif choice == 3:
+            customer.view_cart_items()
+
+        elif choice == 4:
+            customer.pay_bill()
+            
+        elif choice == 5:
+            break
+            
+        else:
+            print('Invalid Choice')
