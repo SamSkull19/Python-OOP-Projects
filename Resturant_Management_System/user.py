@@ -4,6 +4,7 @@
 # Customer
 
 from abc import ABC
+from order import Order
 
 class User(ABC):
     def __init__(self, name, phone, email, address):
@@ -71,44 +72,6 @@ class Admin(User):
         restaurant.menu.remove_item(item)
         
 
-
-
-
-
-
-
-admin = Admin('Samin', '12352552', 'sifatsamin@gmail.com', 'Cumilla', 24)
-print(admin.name)
-print(admin.email)
-print(admin.age)
-
-
-# Admin creates restaurant
-restaurant = Restaurant("Food Haven")
-
-# Admin adds employees
-admin.add_Employees(restaurant, Employee("Rahim", "01711111111", "rahim@gmail.com", "Dhaka", 30, "Manager", 50000))
-admin.add_Employees(restaurant, Employee("Karim", "01822222222", "karim@gmail.com", "Chittagong", 25, "Developer", 40000))
-
-admin.view_Employees(restaurant)
-
-# Admin adds menu items
-admin.add_new_items(restaurant, Food_Items("Pizza", 1200, 4))
-admin.add_new_items(restaurant, Food_Items("Burger", 500, 10))
-admin.add_new_items(restaurant, Food_Items("Pasta", 800, 6))
-
-# Create a customer
-customer = Customer("Sifat", "01999999999", "sifat@gmail.com", "Sylhet")
-
-# Customer views the menu
-customer.view_menu_items(restaurant)
-
-# Customer adds to cart
-customer.add_to_cart(restaurant, "Pizza", 2)
-customer.add_to_cart(restaurant, "Burger", 12)
-
-# Customer views cart
-customer.view_cart_items()
 
 
 
