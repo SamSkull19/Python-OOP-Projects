@@ -34,8 +34,11 @@ class Customer(User):
         item = restaurant.menu.find_items(item_name)
 
         if item:
-            item.quantity = quantity
-            self.cart.add_items(item)
+            if quantity > item.quantity:
+                print("Item quantity Exceeded")
+            else:
+                item.quantity = quantity
+                self.cart.add_items(item)
         else:
             print(f'Item : {item_name} not found')
 
@@ -165,7 +168,7 @@ customer.view_menu_items(restaurant)
 
 # Customer adds to cart
 customer.add_to_cart(restaurant, "Pizza", 2)
-customer.add_to_cart(restaurant, "Burger", 10)
+customer.add_to_cart(restaurant, "Burger", 12)
 
 # Customer views cart
 customer.view_cart_items()
