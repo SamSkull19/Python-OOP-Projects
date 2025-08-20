@@ -25,16 +25,17 @@ class Employee(User):
 class Customer(User):
     def __init__(self, name, phone, email, address):
         super().__init__(name, phone, email, address)
-        self.cart = None
+        self.cart = Order()
     
     def view_menu_items(self, restaurant):
         restaurant.menu.show_menu_items()
 
-    def add_to_cart(self, restaurant, item_name):
+    def add_to_cart(self, restaurant, item_name, quantity):
         item = restaurant.menu.find_items(item_name)
 
         if item:
-            pass
+            item.quantity = quantity
+            self.cart.add_items(item)
         else:
             print(f'Item : {item_name} not found')
 
@@ -42,10 +43,10 @@ class Customer(User):
         print('*** Cart ***')
         print('Name\tPrice\tQuantity')
 
-        for item, quantity in self.cart.item.items():
+        for item, quantity in self.cart.items.items():
             print(f'{item.name}\t{item.price}\t{quantity}')
         
-        print(f'Total Price : {self.cart.total_price}')
+        print(f'Total Price : {self.cart.total_price()}')
 
 class Order:
     def __init__(self):
@@ -54,7 +55,6 @@ class Order:
     def add_items(self, item):
         if item in self.items:
             self.items[item] += item.quantity
-        
         else:
             self.items[item] = item.quantity
 
@@ -63,11 +63,11 @@ class Order:
             del self.items[item]
     
     def total_price(self):
-        return sum(item.price * quantity for item, quantity in self.items.item())
+        return sum(item.price * quantity for item, quantity in self.items.items())
     
     def clear(self):
         self.items = {}
-        
+
 class Admin(User):
     def __init__(self, name, phone, email, address, age):
         super().__init__(name, phone, email, address)
@@ -110,7 +110,7 @@ class Menu:
         for item in self.items:
             if item.name.lower() == item_name.lower():
                 return item
-            return None    
+        return None    
 
     def remove_item(self, item_name):
         item = self.find_items(item_name)
@@ -141,19 +141,34 @@ print(admin.name)
 print(admin.email)
 print(admin.age)
 
-# Create restaurant
+
+# Admin creates restaurant
 restaurant = Restaurant("Food Haven")
 
+# Admin adds employees
 admin.add_Employees(restaurant, Employee("Rahim", "01711111111", "rahim@gmail.com", "Dhaka", 30, "Manager", 50000))
 admin.add_Employees(restaurant, Employee("Karim", "01822222222", "karim@gmail.com", "Chittagong", 25, "Developer", 40000))
 
 admin.view_Employees(restaurant)
 
-menu = Menu()
-item = Food_Items('Pizza', 1200, 4)
+# Admin adds menu items
+admin.add_new_items(restaurant, Food_Items("Pizza", 1200, 4))
+admin.add_new_items(restaurant, Food_Items("Burger", 500, 10))
+admin.add_new_items(restaurant, Food_Items("Pasta", 800, 6))
 
-menu.add_menu_items(item)
-menu.show_menu_items()
+# Create a customer
+customer = Customer("Sifat", "01999999999", "sifat@gmail.com", "Sylhet")
+
+# Customer views the menu
+customer.view_menu_items(restaurant)
+
+# Customer adds to cart
+customer.add_to_cart(restaurant, "Pizza", 2)
+customer.add_to_cart(restaurant, "Burger", 10)
+
+# Customer views cart
+customer.view_cart_items()
+
 
 
         
