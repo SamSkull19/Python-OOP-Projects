@@ -21,6 +21,26 @@ class Employee(User):
 
     def __repr__(self):
         return f'Name : {self.name} |\t Phone : {self.phone} |\t Email : {self.email} |\t Address : {self.address} |\t Age : {self.age} |\t Designation : {self.designation} |\t Salary : {self.salary}'
+    
+class Customer(User):
+    def __init__(self, name, phone, email, address):
+        super().__init__(name, phone, email, address)
+        self.cart = None
+    
+    def view_menu_items(self, restaurant):
+        restaurant.menu.show_menu_items()
+
+    def add_to_cart(self, restaurant, item_name):
+        item = restaurant.menu.find_items(item_name)
+
+        if item:
+            pass
+        else:
+            print(f'Item : {item_name} not found')
+
+    def view_cart_items(self):
+        print('*** Cart ***')
+        print('Name\tPrice\tQuantity')
 
 class Admin(User):
     def __init__(self, name, phone, email, address, age):
