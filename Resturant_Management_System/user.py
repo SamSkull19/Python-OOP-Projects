@@ -46,7 +46,7 @@ class Customer(User):
         for item, quantity in self.cart.items.items():
             print(f'{item.name}\t{item.price}\t{quantity}')
         
-        print(f'Total Price : {self.cart.total_price()}')
+        print(f'Total Price : {self.cart.total_price}')
 
 class Order:
     def __init__(self):
@@ -62,6 +62,7 @@ class Order:
         if item in self.items:
             del self.items[item]
     
+    @property
     def total_price(self):
         return sum(item.price * quantity for item, quantity in self.items.items())
     
