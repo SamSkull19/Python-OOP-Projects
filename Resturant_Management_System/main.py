@@ -82,10 +82,10 @@ def admin_menu():
             admin.add_Employees(neffroxx, employee)
 
         elif choice == 3:
-            admin.view_Employees()
+            admin.view_Employees(neffroxx)
 
         elif choice == 4:
-            admin.view_menu()
+            admin.view_menu(neffroxx)
             
         elif choice == 5:
             item_name = input("Enter Item Name : ")
@@ -96,3 +96,23 @@ def admin_menu():
         
         else:
             print('Invalid Choice')
+
+
+while True:
+    print(f"Welcome to Our {neffroxx.name} Restaurant!!")
+    print("1. Customer")
+    print("2. Admin")
+    print("3. Exit")
+
+    choice = int(input("Enter your choice : "))
+    if choice == 1:
+        customer_menu()
+
+    elif choice == 2:
+        admin_menu()
+
+    elif choice == 3:
+        break
+    
+    else:
+        print("Invalid Input!!")
