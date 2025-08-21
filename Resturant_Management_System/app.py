@@ -40,7 +40,84 @@ if role == "Customer":
                 st.success(f"Welcome {name}!")
 
 
-    
+    if "customer" in st.session_state:
+        customer = st.session_state.customer
+
+        menu_choice = st.selectbox("Choose Action", [
+            "View Menu", "Add to Cart", "View Cart", "Pay Bill"
+        ])
+
+        if menu_choice == "View Menu":
+            st.subheader("📜 Menu Items")
+            if neffroxx.menu.items:
+                # Create lists for table
+                item_names = [item.name for item in neffroxx.menu.items]
+                prices = [item.price for item in neffroxx.menu.items]
+                quantities = [item.quantity for item in neffroxx.menu.items]
+
+                # Create DataFrame
+                df = pd.DataFrame({
+                    "Item Name": item_names,
+                    "Price ($)": prices,
+                    "Quantity": quantities
+                })
+
+                # Display as a table
+                st.table(df)
+            else:
+                st.warning("No items available yet!")
+
+        elif menu_choice == "Add to Cart":
+            st.subheader("🛒 Add Item to Cart")
+            if neffroxx.menu.items:
+                # Select item
+                item_name = st.selectbox("Select Item", [item.name for item in neffroxx.menu.items])
+                quantity = st.number_input("Quantity", min_value=1, step=1)
+
+                # Find the selected item object
+                selected_item = next((item for item in neffroxx.menu.items if item.name == item_name), None)
+
+                if st.button("Add to Cart") and selected_item:
+                    if quantity > selected_item.quantity:
+                        st.warning(f"❌ Not enough quantity available. Only {selected_item.quantity} left.")
+                        
+                    else:
+                        customer.add_to_cart(neffroxx, item_name, quantity)
+                        st.success(f"{quantity} x {item_name} added to cart")
+
+            else:
+                st.warning("No items available to order!")
+
+
+        elif menu_choice == "View Cart":
+            st.subheader("🛍️ Cart Items")
+            if customer.cart.items:
+                # Prepare data for table
+                item_names = [item.name for item, qty in customer.cart.items.items()]
+                prices = [item.price for item, qty in customer.cart.items.items()]
+                quantities = [qty for item, qty in customer.cart.items.items()]
+                totals = [item.price * qty for item, qty in customer.cart.items.items()]
+
+                # Create DataFrame
+                df = pd.DataFrame({
+                    "Item Name": item_names,
+                    "Price ($)": prices,
+                    "Quantity": quantities,
+                    "Total ($)": totals
+                })
+
+                # Display table
+                st.table(df)  # or st.dataframe(df) for scrollable table
+                st.write(f"**Total Price: ${customer.cart.total_price}**")
+            else:
+                st.info("Cart is empty")
+
+        elif menu_choice == "Pay Bill":
+            if customer.cart.items:
+                st.success(f"✅ Paid ${customer.cart.total_price} successfully")
+                customer.pay_bill()
+            else:
+                st.warning("Cart is empty")
 
 
 
