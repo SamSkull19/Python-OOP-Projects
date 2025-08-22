@@ -19,5 +19,14 @@ class Classroom:
         for student in self.students:
             student.calculate_final_grade()
 
-    def get_top_students():
-        pass
+    def get_top_students(self):
+        if not self.students:
+            return None
+        
+        for student in self.students:
+            student.calculate_final_grade()
+        
+        return max(self.students, key=lambda s : s.gpa)
+    
+    
+

@@ -22,6 +22,7 @@ class Student(Person):
         self.subject_grade = {}
         self.marks = {}
         self.grade = None
+        self.gpa = 0.00
         self.__id = None
         # self.total_marks = None
 
@@ -32,13 +33,13 @@ class Student(Person):
             sum += School.grade_to_value(grade)
         
         if not sum:
-            gpa = 0.00
+            self.gpa = 0.00
             self.grade = 'F'
         else:
-            gpa = sum / len(self.subject_grade)
-            self.grade = School.value_to_grade(gpa)
+            self.gpa = sum / len(self.subject_grade)
+            self.grade = School.value_to_grade(self.gpa)
 
-        return f"{self.name} Final Grade : {self.grade} with GPA = {gpa}"
+        return f"{self.name} Final Grade : {self.grade} with GPA = {self.gpa:.2f}"
         
     @property
     def id(self):
