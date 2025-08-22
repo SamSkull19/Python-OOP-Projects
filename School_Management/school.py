@@ -30,4 +30,39 @@ class School:
 
         else: return 'F'
 
+    @staticmethod
+    def grade_to_value(grade):
+        grade_map = {
+            'A+' : 5.00,
+            'A' : 4.00,
+            'A-' : 3.50,
+            'B' : 3.00,
+            'C' : 2.00,
+            'D' : 1.00,
+            'F' : 0.00
+        }
+        return grade_map[grade]
     
+    @staticmethod
+    def value_to_grade(value):
+        if value == 5.00: return 'A+'
+
+        elif value >= 4 and value <= 4.99: return 'A'
+
+        elif value >= 3.0 and value <= 3.99: return 'A-'
+
+        elif value >= 2.5 and value < 3.0: return 'B'
+
+        elif value >= 2.0 and value < 2.5: return 'C'
+        
+        elif value >= 1.0 and value < 2.0: return 'D'
+        
+        else: return 'F'
+
+    def ___repr__(self):
+        # All Classrooms
+        # All Student
+        # All Teacher
+        # All Subject
+        # All Student Results
+        pass
