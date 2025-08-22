@@ -94,6 +94,7 @@ class School:
                 for k, i in student.marks.items():
                     print(student.name, k, i, student.subject_grade[k])
                 print(student.calculate_final_grade())
+                print(student.calculate_total_marks())
 
         print("----Topper Students----")
 
@@ -103,10 +104,10 @@ class School:
             top = value.get_top_students()
 
             if top:
-                topper += f"Topper Name : {top.name},\t GPA: {top.gpa:.2f} ({top.grade})\n"
+                topper += f"Topper Name : {top.name},\t GPA: {top.gpa:.2f} ({top.grade}) Total Marks: {top.calculate_total_marks()}\n"
             
             else:
-                result += f"No students yet.\n"
+                topper += f"No students yet.\n"
 
         print(topper)
 

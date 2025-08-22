@@ -24,7 +24,7 @@ class Student(Person):
         self.grade = None
         self.gpa = 0.00
         self.__id = None
-        # self.total_marks = None
+        self.total_marks = None
 
     def calculate_final_grade(self):
         sum = 0
@@ -40,7 +40,17 @@ class Student(Person):
             self.grade = School.value_to_grade(self.gpa)
 
         return f"{self.name} Final Grade : {self.grade} with GPA = {self.gpa:.2f}"
+    
+    def calculate_total_marks(self):
+        sum = 0
+
+        for mark in self.marks.values():
+            sum += mark
         
+        self.total_marks = sum
+
+        return f"{self.name} Total Marks : {self.total_marks}"
+    
     @property
     def id(self):
         return self.__id
