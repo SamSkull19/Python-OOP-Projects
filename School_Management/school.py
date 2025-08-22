@@ -16,7 +16,7 @@ class School:
         self.classroom[classname].add_student(student)
 
     @staticmethod
-    def calculate_grade(self, marks):
+    def calculate_grade(marks):
         if marks>=80 and marks<=100: return 'A+'
         
         elif marks >= 70 and marks<80: return 'A'
@@ -60,7 +60,7 @@ class School:
         
         else: return 'F'
 
-    def ___repr__(self):
+    def __repr__(self):
         # All Classrooms
         for key in self.classroom.keys():
             print(key)
@@ -93,7 +93,5 @@ class School:
             for student in value.students:
                 for k, i in student.marks.items():
                     print(student.name, k, i, student.subject_grade[k])
-
                 print(student.calculate_final_grade())
-        
-        return ""
+        return ''

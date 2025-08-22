@@ -1,11 +1,11 @@
 class Classroom:
-    def __init__(self, name, student, subjects):
+    def __init__(self, name):
         self.name = name
         self.students = []
         self.subjects = []
 
     def add_student(self, student):
-        reg_no = f"{self.name} - {len(self.student) + 1}"
+        reg_no = f"{self.name} - {len(self.students) + 1}"
         student.id = reg_no
         self.students.append(student)
 
