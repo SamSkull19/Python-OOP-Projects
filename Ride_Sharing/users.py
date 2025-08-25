@@ -31,3 +31,21 @@ class Rider(User):
     def update_location(self, current_location):
         self.current_location = current_location
 
+    def request_ride(self, ride_sharing, destination):
+        pass
+
+    def show_current_ride(self):
+        print(self.current_ride)
+
+
+class Driver(User):
+    def __init__(self, name, email, nid, current_location):
+        super().__init__(name, email, nid)
+        self.current_location = current_location
+        self.wallet = 0
+
+    def display_profile(self):
+        print(f'Driver Name : {self.name}')
+
+    def accept_ride(self, ride):
+        pass
