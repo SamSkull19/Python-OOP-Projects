@@ -5,6 +5,10 @@ class User(ABC):
         self.name = name
         self.email = email
         self.nid = nid
-        self.wallet = 0
+        self.wallet = 0 
+    
+    @abstractmethod
+    def display_profile(self):
+        raise NotImplementedError
     
     
