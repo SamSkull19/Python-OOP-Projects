@@ -23,3 +23,12 @@ class Ride:
 
     def __repr__(self):
         return f'Ride Details : Started {self.start_time} to Ended {self.end_location}'
+    
+
+class RideRequest:
+    def __init__(self, rider, end_location):
+        self.rider = rider
+        self.end_location = end_location
+
+
+        
