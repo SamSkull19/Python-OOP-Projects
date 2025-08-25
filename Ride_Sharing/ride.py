@@ -20,3 +20,6 @@ class Ride:
         self.end_time = datetime.now()
         self.rider.wallet -= self.estimated_time
         self.driver.wallet += self.estimated_time
+
+    def __repr__(self):
+        return f'Ride Details : Started {self.start_time} to Ended {self.end_location}'
