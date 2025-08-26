@@ -10,3 +10,10 @@ neffroxx.add_rider(karim)
 rahim = Driver("Rahim Uddin", "rahim@gmail.com", 1256, "Gulshan")
 neffroxx.add_driver(rahim)
 
+karim.request_ride(neffroxx, "Uttara", "car")
+
+rahim.reach_destination(karim.current_ride)
+
+karim.show_current_ride()
+
+print(neffroxx)

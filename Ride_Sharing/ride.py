@@ -11,7 +11,7 @@ class RideSharing:
         self.riders.append(rider)
         
     def add_driver(self, driver):
-        self.riders.append(driver)
+        self.drivers.append(driver)
 
     def __str__(self):
         return f"Company Name {self.company_name} with riders : {len(self.riders)} and Drivers : {len(self.drivers)}"
@@ -24,7 +24,7 @@ class Ride:
         self.rider = None
         self.start_time = None
         self.end_time = None
-        self.estimated_time = None
+        self.estimated_fare = self.calculate_fare(vehicle.vehicle_type)
         self.vehicle = vehicle
 
     def set_driver(self, driver):
@@ -35,8 +35,8 @@ class Ride:
         
     def end_ride(self):
         self.end_time = datetime.now()
-        self.rider.wallet -= self.estimated_time
-        self.driver.wallet += self.estimated_time
+        self.rider.wallet -= self.estimated_fare
+        self.driver.wallet += self.estimated_fare
 
     def calculate_fare(self, vehicle):
         distance = 20
