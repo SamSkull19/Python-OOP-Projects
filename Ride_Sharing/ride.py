@@ -38,10 +38,19 @@ class Ride:
         self.rider.wallet -= self.estimated_time
         self.driver.wallet += self.estimated_time
 
+    def calculate_fare(self, vehicle):
+        distance = 20
+
+        fare_per_dis = {
+            'car' : 50,
+            'bike' : 20,
+            'cng' : 30
+        }
+        return distance * fare_per_dis.get(vehicle)
+    
     def __repr__(self):
         return f'Ride Details : Started {self.start_time} to Ended {self.end_location}'
     
-
 class RideRequest:
     def __init__(self, rider, end_location):
         self.rider = rider
@@ -62,7 +71,7 @@ class RideMatching:
 
             elif vehicle_type == 'bike':
                 vehicle = Bike("bike", "1234BH", 20)
-                
+
             else:
                 vehicle = Cng("cng", "CX2424", 30)
 
