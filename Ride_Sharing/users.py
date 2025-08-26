@@ -40,7 +40,13 @@ class Rider(User):
         print("YAY! We got a ride")
 
     def show_current_ride(self):
-        print(self.current_ride)
+        print("Ride Details!!")
+        print(f"Rider : {self.name}")
+        print(f"Driver : {self.current_ride.driver.name}")
+        print(f"Seleted Car : {self.current_ride.vehicle.vehicle_type}")
+        print(f"Start Location : {self.current_ride.start_location}")
+        print(f"End Location : {self.current_ride.end_location}")
+        print(f"Total Cost : {self.current_ride.estimated_fare}")
 
 
 class Driver(User):
